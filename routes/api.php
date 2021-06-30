@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\APIUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use function Clue\StreamFilter\fun;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user', [APIUserController::class, 'fetch']);
+    Route::post('user', [APIUserController::class, 'updateProfile']);
+    Route::post('user/photo', [APIUserController::class, 'uploadPhoto']);
+    Route::get('logout', [APIUserController::class, 'logout']);
 });
+
+Route::post('login', [APIUserController::class, 'login']);
+Route::post('register', [APIUserController::class, 'register']);
