@@ -55,9 +55,9 @@ class MidtransController extends Controller
         $transaction->save();
     }
 
-    public function sucess(Request $request)
+    public function success(Request $request)
     {
-        return view('midtrans.sucess');
+        return view('midtrans.success');
     }
 
     public function unfinish(Request $request)
