@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -30,3 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
+
+Route::post('midtrans/callback', [MidtransController::class, 'callback']);
