@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
                 <a href="{{ route('users.create') }}"
-                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     + Add New User
                 </a>
             </div>
@@ -33,14 +33,14 @@
                                 <td class="border px-6 py-4">{{ $item->roles }}</td>
                                 <td class="border px-6 py- text-center">
                                     <a href="{{ route('users.edit', $item->id) }}"
-                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 mx-2 rounded">
+                                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
                                         Edit
                                     </a>
                                     <form action="{{ route('users.destroy', $item->id) }}" method="POST"
                                         class="inline-block">
                                         {!! method_field('delete') . csrf_field() !!}
                                         <button type="submit"
-                                            class="bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 mx-2 rounded inline-block">
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded inline-block">
                                             Delete
                                         </button>
                                     </form>
