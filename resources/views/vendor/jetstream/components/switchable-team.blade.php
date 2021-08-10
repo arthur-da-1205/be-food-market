@@ -1,6 +1,6 @@
 @props(['team', 'component' => 'jet-dropdown-link'])
 
-<form method="POST" action="{{ route('current-team.update') }}">
+<form method="POST" action="/current-team">
     @method('PUT')
     @csrf
 

@@ -72,12 +72,20 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => $this->passwordRules()
+            // $request->validate([
+            //     'name' => ['required', 'string', 'max:255'],
+            //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //     'password' => $this->passwordRules()
+            // ]);
+            // $rules = [
+            //     'name' => ['required', 'string', 'max:255'],
+            //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //     'password' => $this->passwordRules()
+            // ];
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required'
             ]);
-
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -85,8 +93,11 @@ class UserController extends Controller
                 'houseNumber' => $request->houseNumber,
                 'phoneNumber' => $request->phoneNumber,
                 'city' => $request->city,
+                'roles' => $request->roles,
                 'password' => Hash::make($request->password),
             ]);
+
+            // $validator = FacadesValidator::make($request->all(), $rules);
 
             $user = User::where('email', $request->email)->first();
 
@@ -98,10 +109,14 @@ class UserController extends Controller
                 'user' => $user
             ], 'User Registered');
         } catch (Exception $error) {
-            return ResponseFormatter::error([
-                'message' => 'Something went wrong',
-                'error' => $error,
-            ], 'Authentication Failed', 500);
+            // return ResponseFormatter::error([
+            //     'message' => 'Something went wrong',
+            //     'error' => $error,
+            // ], 'Authentication Failed', 500);
+
+            if ($validator->fails()) {
+                return response()->json($validator->error(), 400);
+            }
         }
     }
 

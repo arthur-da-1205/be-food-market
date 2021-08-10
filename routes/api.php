@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\UserController;
@@ -21,6 +22,7 @@ use function Clue\StreamFilter\fun;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
+
     Route::post('user', [UserController::class, 'updateProfile']);
     Route::post('user/photo', [UserController::class, 'uploadPhoto']);
     Route::get('logout', [UserController::class, 'logout']);
@@ -28,6 +30,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('transaction', [TransactionController::class, 'all']);
     Route::post('checkout', [TransactionController::class, 'checkout']);
 });
+
+Route::get('food', [FoodController::class, 'all']);
+
+
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
